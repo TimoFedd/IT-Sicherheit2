@@ -21,6 +21,10 @@ public class LCG {
 			return 1;
 	}
 
+	
+	
+	
+	//****************************************************************
 	public static void main(String[] args) {
 
 		LCG generator = new LCG(6);

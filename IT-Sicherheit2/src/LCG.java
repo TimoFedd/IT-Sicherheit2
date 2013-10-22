@@ -1,27 +1,41 @@
 
 public class LCG {
 
-	int startwert;
+	double startwert;
+	double x;
+	double a = 2653;
+	double b = 1;
+	double n = Math.pow(2, 32);
 	
-	public int nextValue(){
+	   public int nextValue(){
 		
-		
-		return 0;
-	}
-	
-	
+       double next= (a*x+b)%n;
+	   x = next;
+
+	      if(next<n/2)
+	    	  return 0;
+	      else
+	    	 return 1;
+       }
 	
 	public LCG(int startwert){
-		this.startwert=startwert;
-	}
+	  	   x=startwert;
+	   }
 	
 	
 	public static void main(String[] args) {
 	
 
-		LCG generator = new LCG(5);
-		System.out.println("Hello world :)");
-		
+		LCG generator = new LCG(6);
+		System.out.println(generator.nextValue());
+		System.out.println(generator.nextValue());
+		System.out.println(generator.nextValue());
+		System.out.println(generator.nextValue());
+		System.out.println(generator.nextValue());
+		System.out.println(generator.nextValue());
+		System.out.println(generator.nextValue());
+		System.out.println(generator.nextValue());
+
 		
 	}
 

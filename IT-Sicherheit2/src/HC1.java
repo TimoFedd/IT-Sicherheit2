@@ -8,11 +8,12 @@ public class HC1 {
 	int key;
 	String path;
 	FileOutputStream fos = new FileOutputStream("C:\\Users\\Timo\\git\\IT-Sicherheit2\\IT-Sicherheit2\\src\\test2.txt");
-    LCG generator = new LCG(key);
+    LCG generator;
 
 	public HC1(int key, String path) throws IOException {
 		this.key = key;
 		this.path = path;
+		this.generator = new LCG(key);
 		krypt();
 	}
 
@@ -24,17 +25,15 @@ public class HC1 {
 
 			while (next != -1) { 
 
-				String krypt = Integer.toBinaryString(next ^ generateNewCryptByte()); // Mit generiertn Zufallswert verknüpfen
-				int output = Integer.parseInt(krypt, 2);// Binär umwandeln in dezimale Darstellung
-				fos.write(output);
+				int krypt = next ^ generateNewCryptByte(); // Mit generiertn Zufallswert verknüpfen
+				fos.write(krypt);
 
 				next = in.read(); // naechstes Byte einlesen
 			}
 
 	in.close();
-
+    System.out.println("Der verschluesselungs/entschluessel Vorgang, ist beendet.");
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -48,15 +47,14 @@ public class HC1 {
 		for(int i=0;i<8;i++){
 			binaer+=generator.nextValue();
 		}
-		
-		return Integer.valueOf(binaer);
+		return Integer.valueOf(binaer, 2);
 	}
 	
 	
-
-	// ****************************************************************
+// ****************************************************************
 	public static void main(String[] args) throws IOException {
-		HC1 lala = new HC1(122,"C:\\Users\\Timo\\git\\IT-Sicherheit2\\IT-Sicherheit2\\src\\test.txt");
+		
+		HC1 verschluesseln = new HC1(13,"C:\\Users\\Timo\\git\\IT-Sicherheit2\\IT-Sicherheit2\\src\\test.txt");
 	}
 
 }

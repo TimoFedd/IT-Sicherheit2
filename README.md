@@ -1,4 +1,6 @@
 IT-Sicherheit2
 ==============
 
-2tes Praktikum
+Erkenntnisse:
+
+Bei XOR auf int, darf man nicht erst auf Binär Darstellung wechseln, sondern ganz normal Dezimal verwenden!

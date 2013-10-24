@@ -7,7 +7,7 @@ public class HC1 {
 
 	int key;
 	String path;
-	FileOutputStream fos = new FileOutputStream("C:\\Users\\Timo\\git\\IT-Sicherheit2\\IT-Sicherheit2\\src\\test2.txt");
+	FileOutputStream fos = new FileOutputStream("C:\\Users\\aau759\\Desktop\\Verschluesselt.txt");
     LCG generator;
 
 	public HC1(int key, String path) throws IOException {
@@ -54,7 +54,7 @@ public class HC1 {
 // ****************************************************************
 	public static void main(String[] args) throws IOException {
 		
-		HC1 verschluesseln = new HC1(13,"C:\\Users\\Timo\\git\\IT-Sicherheit2\\IT-Sicherheit2\\src\\test.txt");
+		HC1 verschluesseln = new HC1(14,"C:\\Users\\aau759\\Desktop\\Test.txt");
 	}
 
 }

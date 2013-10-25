@@ -5,17 +5,27 @@ import java.util.Arrays;
 
 public class TripleDES {
 
+	String source,keys,target,operation;
+	
+	public TripleDES(String source, String keys, String target,String operation) {
+
+		this.source = source;
+		this.keys = keys;
+		this.target = target;
+		this.operation = operation;
+	}
+
+
 	private void krypt() throws IOException {
 
-		FileInputStream inKlartext = new FileInputStream("C:\\Users\\ssupport\\Desktop\\Test.txt");
-
-		FileInputStream inKeys = new FileInputStream("C:\\Users\\ssupport\\Desktop\\3DESTest.key");
-		FileOutputStream out = new FileOutputStream("C:\\Users\\ssupport\\Desktop\\3DESTest.txt");
+		FileInputStream inKlartext = new FileInputStream(source);
+        FileInputStream inKeys = new FileInputStream(keys);
+		FileOutputStream out = new FileOutputStream(target);
 
 		byte[] schluessel1 = new byte[8];
 		byte[] schluessel2 = new byte[8];
 		byte[] schluessel3 = new byte[8];
-		byte[] iv =  {12,32,42,45,23,4,1,2};
+		byte[] iv =  new byte[8];
 		
 		byte[] newIV = new byte[8];
 
@@ -32,8 +42,6 @@ public class TripleDES {
 		DES des2 = new DES(schluessel2);
 		DES des3 = new DES(schluessel3);
 		
-	
-
 		des1.encrypt(iv, 0, tmp1, 0);
 		des2.decrypt(tmp1, 0, tmp2, 0);
 		des3.encrypt(tmp2, 0, tmp3, 0);
@@ -51,12 +59,15 @@ public class TripleDES {
 				out.write(output);
 			}
 			
+			//beim entschlüsseln wird newIV auf den buffer geändert
+			if(operation.equals("decrypt"))
+				newIV = buffer;
+			
 			des1.encrypt(newIV, 0, tmp1, 0);
 			des2.decrypt(tmp1, 0, tmp2, 0);
 			des3.encrypt(tmp2, 0, tmp3, 0);
 			
-			
-			len = inKlartext.read(buffer);
+            len = inKlartext.read(buffer);
 		}
 		
 
@@ -64,7 +75,7 @@ public class TripleDES {
 
 	public static void main(String[] args) throws IOException {
 
-		TripleDES k = new TripleDES();
+		TripleDES k = new TripleDES(args[0],args[1],args[2],args[3]);
 		k.krypt();
 
 	}

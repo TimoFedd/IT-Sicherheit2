@@ -1,23 +1,22 @@
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class TripleDES {
 
 	private void krypt() throws IOException {
 
-		FileInputStream inKlartext = new FileInputStream("C:\\Users\\aau759\\Desktop\\Test.txt");
+		FileInputStream inKlartext = new FileInputStream("C:\\Users\\ssupport\\Desktop\\Test.txt");
 
-		FileInputStream inKeys = new FileInputStream("C:\\Users\\aau759\\Desktop\\3DESTest.key");
-		FileOutputStream out = new FileOutputStream("C:\\Users\\aau759\\Desktop\\3DESTest.txt");
+		FileInputStream inKeys = new FileInputStream("C:\\Users\\ssupport\\Desktop\\3DESTest.key");
+		FileOutputStream out = new FileOutputStream("C:\\Users\\ssupport\\Desktop\\3DESTest.txt");
 
 		byte[] schluessel1 = new byte[8];
 		byte[] schluessel2 = new byte[8];
 		byte[] schluessel3 = new byte[8];
 		byte[] iv =  {12,32,42,45,23,4,1,2};
 		
-		
-		//byte[] iv = new byte[8];
 		byte[] newIV = new byte[8];
 
 		byte[] tmp1 = new byte[8];
@@ -29,9 +28,11 @@ public class TripleDES {
 		inKeys.read(schluessel3);
 		inKeys.read(iv);
 
-		DES des1 = new DES(inKeys.read(schluessel1));
-		DES des2 = new DES(inKeys.read(schluessel2));
-		DES des3 = new DES(inKeys.read(schluessel3));
+		DES des1 = new DES(schluessel1);
+		DES des2 = new DES(schluessel2);
+		DES des3 = new DES(schluessel3);
+		
+	
 
 		des1.encrypt(iv, 0, tmp1, 0);
 		des2.decrypt(tmp1, 0, tmp2, 0);

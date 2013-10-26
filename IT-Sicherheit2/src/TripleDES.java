@@ -8,6 +8,7 @@ public class TripleDES {
 	String source,keys,target,operation;
 	
 	public TripleDES(String source, String keys, String target,String operation) {
+		
 		//Test ob operation korrekt ist
 		if(!(operation.equals("encrypt")||operation.equals("decrypt"))){
 			System.out.println("Fehler!: "+operation+" ist keine gueltige operation! Verwenden Sie encrypt oder decrypt");
@@ -64,19 +65,15 @@ public class TripleDES {
 				out.write(output);
 			}
 			
-			//Entschlüsseln
-			if(operation.equals("decrypt")){
-				des1.encrypt(buffer, 0, tmp1, 0);
-				des2.decrypt(tmp1, 0, tmp2, 0);
-				des3.encrypt(tmp2, 0, tmp3, 0);
+			//Beim entschlüseln wird statt newIV der buffer benutzt
+			if(operation.equals("decrypt"))
+				newIV = buffer.clone();
 				
-			}else{ //Verschlüsseln
 				des1.encrypt(newIV, 0, tmp1, 0);
 				des2.decrypt(tmp1, 0, tmp2, 0);
 				des3.encrypt(tmp2, 0, tmp3, 0);
-	
-			}
-
+				
+		
             len = inKlartext.read(buffer);
 		}
 		

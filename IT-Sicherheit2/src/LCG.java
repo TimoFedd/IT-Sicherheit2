@@ -1,35 +1,25 @@
 public class LCG {
 
-	
-	double x;
-	double a = 2653;
-	double b = 1;
-	double n = Math.pow(2, 32);
+	long x;
+	long a = 1103515245;
+	long b = 12345;
+	long n = (long) Math.pow(2, 31);
 
-	public LCG(int startwert) {
+	public LCG(long startwert) {
 		x = startwert;
 	}
 
-	public int nextValue() {
+	public double nextValue() {
 
-		double next = (a * x + b) % n;
+		long next = (a * x + b) % n;
 		x = next;
-
-		if (next < n / 2)
-			return 0;
-		else
-			return 1;
+		return ((double) x / (double) n);
 	}
 
-	
-	
-	
-	//****************************************************************
+	// ****************************************************************
 	public static void main(String[] args) {
 
-		LCG generator = new LCG(6);
-		System.out.println(generator.nextValue());
-		System.out.println(generator.nextValue());
+		LCG generator = new LCG(1);
 		System.out.println(generator.nextValue());
 		System.out.println(generator.nextValue());
 		System.out.println(generator.nextValue());

@@ -25,7 +25,7 @@ public class HC1 {
 
 			while (next != -1) { 
 
-				int krypt = next ^ generateNewCryptByte(); // Mit generiertn Zufallswert verknüpfen
+				int krypt = next ^ (int)(generator.nextValue()*256); // Mit generiertn Zufallswert verknüpfen
 				fos.write(krypt);
 
 				next = in.read(); // naechstes Byte einlesen
@@ -39,17 +39,7 @@ public class HC1 {
 
 	}
 	
-	
-	//generiert ein zufälliges Byte
-	private int generateNewCryptByte(){
-		
-		String binaer="";
-		for(int i=0;i<8;i++){
-			binaer+=generator.nextValue();
-		}
-		return Integer.valueOf(binaer, 2);
-	}
-	
+
 	
 // ****************************************************************
 	public static void main(String[] args) throws IOException {
